@@ -1,0 +1,29 @@
+allprojects {
+    group = 'com.swnck.multimodule'
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+subprojects {
+    tasks.register('prepareKotlinBuildScriptModel')
+
+    plugins.withId('java') {
+        java {
+            sourceCompatibility = JavaVersion.VERSION_26
+            targetCompatibility = JavaVersion.VERSION_26
+        }
+
+        compileJava {
+            options.encoding = 'UTF-8'
+            options.compilerArgs << '-parameters'
+        }
+
+        compileTestJava {
+            options.encoding = 'UTF-8'
+        }
+    }
+}
